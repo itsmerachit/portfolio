@@ -1,14 +1,15 @@
 .terminal-buttons {
     width: 36rem;
-    @apply bg-gray-900 rounded-t-lg h-8 gap-2
+    background: #5F506B;
+    @apply rounded-t-lg h-8 gap-2;
 }
 .terminal-body {
     width: 36rem;
-    background: #d8dbe2;
+    background: #A4A8B2;
 }
 .terminal-body-dark {
     width: 36rem;
-    background: #373f51;
+    background: #223D54;
 }
 .circle{
     border-radius: 50%;
@@ -37,11 +38,21 @@
     color: #0bd91f
 }
 .text-yellow {
-    color: #d9bd0b
+    color: #ede01b
 }
 .text-blue {
     color: #2057d6
 }
 .text-indigo {
     color: #250b75
+}
+.text-voilet {
+    color: #a510ca
+}
+.bulb{
+    @apply h-4 w-4 rounded-lg mt-3 animate-pulse
+}
+.bg-green {
+    box-shadow: 0 0 0.5em #83f511;
+    background: #83f511
 }

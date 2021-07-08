@@ -12,6 +12,9 @@
 .pill-options {
     @apply hover:underline
 }
-.bg-white-400 {
-    background: #d8dbe2;
+.pill-bg-white {
+    background: #467599;
+}
+.pill-bg-dark {
+    background: #1D3354;
 }
