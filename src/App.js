@@ -1,25 +1,18 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Terminal from './components/terminal/terminal';
+import Darky from './components/darky/darky';
+import AboutMe from './components/aboutme/aboutme';
 
-function App() {
+function App () {
+  let [darkMode, setDarkMode] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={"flex flex-col justify-center items-center pt-24 pb-12 " +(darkMode? "dark-main": "light-main")}>
+      <Darky setDarkMode={setDarkMode} darkMode={darkMode}></Darky>
+      <Terminal darkMode={darkMode}></Terminal>
+      <AboutMe darkMode={darkMode}></AboutMe>
     </div>
-  );
+  )
 }
 
 export default App;

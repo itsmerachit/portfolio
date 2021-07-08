@@ -1,0 +1,47 @@
+.terminal-buttons {
+    width: 36rem;
+    @apply bg-gray-900 rounded-t-lg h-8 gap-2
+}
+.terminal-body {
+    width: 36rem;
+    background: #d8dbe2;
+}
+.terminal-body-dark {
+    width: 36rem;
+    background: #373f51;
+}
+.circle{
+    border-radius: 50%;
+    @apply p-2 h-4 w-4 mt-2
+}
+.circle:first-child {
+    @apply ml-4 h-1 w-1;
+}
+.terminal {
+    @apply shadow-2xl
+}
+.circle-sm{
+    border-radius: 50%;
+    @apply h-1 w-1 relative bottom-0.5 right-0.5
+}
+.bg-green{
+    background: #21d20b
+}
+.text-red {
+    color: #d92a0b
+}
+.text-orange {
+    color: #ed9a09
+}
+.text-green {
+    color: #0bd91f
+}
+.text-yellow {
+    color: #d9bd0b
+}
+.text-blue {
+    color: #2057d6
+}
+.text-indigo {
+    color: #250b75
+}

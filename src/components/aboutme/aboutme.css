@@ -1,0 +1,17 @@
+.dark-about{
+    background: #373F51;
+}
+.light-about{
+    background: #58A4B0;
+}
+
+.pill {
+    border-radius: 2.5rem;
+    @apply h-8 w-64 relative bottom-4
+}
+.pill-options {
+    @apply hover:underline
+}
+.bg-white-400 {
+    background: #d8dbe2;
+}
