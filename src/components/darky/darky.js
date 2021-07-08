@@ -3,7 +3,7 @@ export default function Darky({ darkMode, setDarkMode }) {
   return (
     <div className="dark-mode-btn">
       <button
-        className={"text-white py-2 px-4 rounded-2xl relative bottom-8 " + (darkMode?"bg-blue-800":"bg-blue-500")}
+        className={"text-white py-2 px-4 rounded-2xl relative bottom-8 " + (darkMode?"btn-dark":"btn-light")}
         onClick={() => {
           setDarkMode(!darkMode);
         }}>
