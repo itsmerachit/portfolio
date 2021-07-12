@@ -4,10 +4,14 @@
 .light-about{
     background: #58A4B0;
 }
-
+.about-us {
+    @apply mt-20 w-screen;
+}
 .pill {
     border-radius: 2.5rem;
-    @apply h-8 w-64 relative bottom-4
+    left: 40%;
+    box-shadow: 0 0 0.25rem 0 #111;
+    @apply h-8 w-64 relative bottom-4;
 }
 .pill-options {
     @apply hover:underline
@@ -17,4 +21,17 @@
 }
 .pill-bg-dark {
     background: #1D3354;
+}
+.image-ctr{
+    border-radius: 50%;
+    @apply overflow-hidden h-64 w-64 flex items-center justify-center;
+}
+.my-img{
+    @apply w-auto h-72;
+}
+.content-ctr{
+    /* @apply ; */
+}
+.about-content{
+    @apply flex items-center justify-center gap-16;
 }
