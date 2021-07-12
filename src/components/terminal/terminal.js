@@ -4,15 +4,17 @@ export default function Terminal({ darkMode, setDarkMode }) {
   
   //List of terminal commands
   let availableCommands = [
-    "about",
-    "clear",
-    "commands",
-    "contact",
-    "darkmode",
-    "echo",
-    "git",
-    "hello"
+    {name: "about", description: "Tells about Rachit!"},
+    {name: "clear", discription: "Clears the terminal"},
+    {name: "commands", description: "Lists all the available commands"},
+    {name: "contact", description: "Displays contact details"},
+    {name: "darkmode", description: "Toggles dark mode. Available options: true | false"},
+    {name: "echo", description: "Outputs the strings passed as arguments"},
+    {name: "git", description: "Displays Rachit's github url"},
+    {name: "hello", description: "Greet the creator"},
+    {name: "help", description: "Helps with usage of command provided as argument"}
   ];
+
   //About content
   let content = [(
     <div>
@@ -31,12 +33,12 @@ export default function Terminal({ darkMode, setDarkMode }) {
       </ul>
       <br />
       <p>Type commands to know more</p>
+      <p>Type help {'<command-name>'} to know more about command's usage.</p>
     </div>
   )];
   
   //Input box in terminal
   let inputRef = useRef(null);
-  let terminalRef = useRef(null);
   let upClicks = 0;
   
   //State variables
@@ -58,10 +60,13 @@ export default function Terminal({ darkMode, setDarkMode }) {
 
   //Focuses on input box when clicked on terminal
   function handleTerminalClick () {
-    console.log('clicked');
     inputRef.current.focus();
   };
 
+  /**
+   * Handles Terminal Input
+   * @param {Object} e Event
+   */
   //Handles command execution
   function handleTerminalInput (e) {
     if (e.key === "Enter") {
@@ -72,6 +77,7 @@ export default function Terminal({ darkMode, setDarkMode }) {
       inputRef.current.focus();
       return;
     } else if (e.key === 'ArrowUp') {
+      //TODO: Implement history commands
       if(!history.length || history.length < upClicks) {
         return;
       }
@@ -98,6 +104,11 @@ export default function Terminal({ darkMode, setDarkMode }) {
     return;
   }
 
+  /**
+   * Handles command execution
+   * @param {String} command command provided to the terminal
+   * @param  {...any} args command options / arguments
+   */
   function handleCommandInput (command, ...args) {
     setHistory((history)=>{
       if ( history.length <10)
@@ -112,7 +123,7 @@ export default function Terminal({ darkMode, setDarkMode }) {
         handleCommandOutput(command, "");
         break;
       case "commands":
-        handleCommandOutput(command, availableCommands);
+        handleCommandOutput(command, availableCommands.map(command=>command.name));
         break;
       case "contact":
         handleCommandOutput(command, "email: sharma.rachit2107@gmail.com");
@@ -135,10 +146,19 @@ export default function Terminal({ darkMode, setDarkMode }) {
           handleCommandOutput(command, args[0].join(" "));
           break;
       case "git": 
-        handleCommandOutput(command, "git: https://github.com/itsmerachit/");
+        handleCommandOutput(command, "git: https://github.com/itsmerachit");
         break;
       case "hello": 
         handleCommandOutput(command, "hello there! nice to meet you!");
+        break;
+      case "help":
+        if(!args[0].length) {
+          handleCommandOutput(command, `${command} requires 1 argument but 0 were provided`);
+          return;
+        }
+        let requiredCommand = args[0][0];
+        let requiredHelp = availableCommands.filter(command=>{return command.name === requiredCommand});
+        handleCommandOutput(command, requiredHelp[0].description);
         break;
       default:
         setLogs((logs)=>[...logs, `guest@macbook > ${command}`, `zsh: command not found: ${command}`])
@@ -146,23 +166,24 @@ export default function Terminal({ darkMode, setDarkMode }) {
   }
 
   return (
-    <div className="terminal" onClick={handleTerminalClick} ref={terminalRef}>
+    <div className="terminal rounded-lg" onClick={handleTerminalClick}>
+      {/* Terminal Header */}
       <div className="terminal-header">
         <div className="terminal-buttons inline-flex">
           <div className="circle bg-red-500 top-1 left-1">
             <div className="circle-sm bg-red-800"></div>
           </div>
           <div className="circle bg-yellow-400"></div>
-          <div className="circle bg-green"></div>
+          <div className="circle btn-green"></div>
         </div>
       </div>
-      <div className={"terminal-body rounded-b-lg h-96 overflow-y-scroll " +(darkMode ? " text-white terminal-body-dark " : " terminal-body ")}>
-        <div className={"p-2 commands"}>
+      {/* Terminal Body */}
+      <div className={"terminal-body " +(darkMode ? " text-white terminal-body-dark " : " terminal-body-light ")}>
+        <div className={"p-2 commands"} ref={commandRef}>
           {logs.length ?
-          (logs.map((log, index) => {
-              return <span key={index}>{log}<br /></span>;
-          }))
-          :''
+            (logs.map((log, index) => (<span key={index}>{log}<br /></span>) ) )
+          :
+            ''
           }
           <span>
             guest@macbook{">"}
