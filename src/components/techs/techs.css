@@ -1,0 +1,15 @@
+.text-light-techs{
+    color: #082442;
+}
+.card{
+    @apply w-full h-96;
+}
+.card-header{
+    @apply text-2xl;
+}
+.text-h-dark-techs{
+    color: #1f3a8a;
+}
+.text-h-light-techs {
+    color: #082442;
+}
