@@ -4,6 +4,7 @@ import Terminal from './components/terminal/terminal';
 import Darky from './components/darky/darky';
 import { RecruitmentStatus } from './components/terminal/terminal';
 import AboutMe from './components/aboutme/aboutme';
+import Technologies from './components/techs/techs';
 
 function App () {
   let [darkMode, setDarkMode] = useState(false);
@@ -13,6 +14,7 @@ function App () {
       <Terminal darkMode={darkMode} setDarkMode={setDarkMode}></Terminal>
       <RecruitmentStatus darkMode={darkMode}></RecruitmentStatus>
       <AboutMe darkMode={darkMode}></AboutMe>
+      <Technologies darkMode={darkMode}></Technologies>
     </div>
   )
 }
