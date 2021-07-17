@@ -35,3 +35,6 @@
 .about-content{
     @apply flex items-center justify-center gap-16;
 }
+.text-light{
+    color: #082442;
+}
