@@ -1,5 +1,6 @@
 .terminal {
     box-shadow: 0 0 1rem 0 #111;
+    @apply m-4
 }
 .terminal-buttons {
     width: 36rem;

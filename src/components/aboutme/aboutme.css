@@ -5,7 +5,10 @@
     background: #58A4B0;
 }
 .about-us {
-    @apply mt-20 w-screen;
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    @apply mt-20;
 }
 .pill {
     border-radius: 2.5rem;
@@ -34,6 +37,11 @@
 }
 .about-content{
     @apply flex items-center justify-center gap-16;
+}
+@media screen and (max-width:900px) {
+    .about-content{
+        @apply flex-col pt-4;
+    }    
 }
 .text-light{
     color: #082442;

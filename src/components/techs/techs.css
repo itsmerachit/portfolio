@@ -13,3 +13,14 @@
 .text-h-light-techs {
     color: #082442;
 }
+.card-container {
+    @apply flex justify-center items-center gap-40 pt-20;
+}
+@media screen and (max-width: 900px) {
+    .card-container {
+        @apply flex-col gap-4;
+    }
+    .card {
+        @apply h-auto;
+    }
+}

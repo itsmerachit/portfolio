@@ -6,7 +6,7 @@ export default function Technologies({darkMode}) {
     let dbList = ["MongoDb", "Firestore", "Postgres"];
     return (<>
         <div className={"text-3xl pt-8 "+ (darkMode?"text-light-techs":"text-black")}>Technologies I know:</div>
-        <div className={"flex justify-center items-center gap-40 pt-20"}>
+        <div className={"card-container"}>
             <div className={"card"}>
                 <span className={"card-header " + (darkMode?"text-h-light-techs":"text-h-dark-techs")}>Languages</span>
                 <ul className={"list-disc ml-4 "+ (darkMode?" text-white":" text-black") }>
