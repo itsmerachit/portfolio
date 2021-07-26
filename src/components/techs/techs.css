@@ -2,6 +2,7 @@
     color: #082442;
 }
 .card{
+    flex: 1 0 22%;
     @apply w-full h-96;
 }
 .card-header{
@@ -18,9 +19,12 @@
 }
 @media screen and (max-width: 900px) {
     .card-container {
-        @apply flex-col gap-4;
+        flex-wrap: wrap;
+        gap: 2rem;
     }
     .card {
+        flex: 0 1 40%;
+        height: 10rem !important;
         @apply h-auto;
     }
 }
