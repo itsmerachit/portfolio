@@ -53,7 +53,7 @@ export default function AboutMe({darkMode}) {
                         <span className={"text-2xl " + (darkMode?"text-light":"text-black")}>Links</span>
                         <ul>
                             <li><a href="https://www.github.com/itsmerachit" rel="noreferrer" target="_blank">Github</a></li>
-                            <li><a href="#" target="_blank">LinkedIn</a></li>
+                            <li><a href="https://www.linkedin.com/in/rachit-sharma-356a24150/" rel="noreferrer" target="_blank">LinkedIn</a></li>
                         </ul>
                     </span>
                 </div>
