@@ -58,6 +58,7 @@ export default function Terminal({ darkMode, setDarkMode }) {
   useEffect(() => {
     setLogs(content);
     return ()=>{setLogs("")}
+    //eslint-disable-next-line
   },[]);
 
   //Focuses on input box when clicked on terminal
@@ -141,10 +142,13 @@ export default function Terminal({ darkMode, setDarkMode }) {
         if(!args[0].length) {
           handleCommandOutput(command, `${command} requires 1 argument but 0 were provided`);
         }
+        //eslint-disable-next-line
         if(args[0][0] == 'true'){
           setDarkMode(true);
           handleCommandOutput(command, "dark mode enabled.");
-        } else if (args[0][0] == 'false') {
+        }
+        //eslint-disable-next-line
+         else if (args[0][0] == 'false') {
           setDarkMode(false);
           handleCommandOutput(command, "dark mode disabled.");
         } else {
