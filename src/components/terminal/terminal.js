@@ -5,7 +5,7 @@ export default function Terminal({ darkMode, setDarkMode }) {
   //List of terminal commands
   let availableCommands = [
     {name: "about", description: "Tells about Rachit!"},
-    {name: "clear", discription: "Clears the terminal"},
+    {name: "clear", description: "Clears the terminal"},
     {name: "commands", description: "Lists all the available commands"},
     {name: "contact", description: "Displays contact details"},
     {name: "darkmode", description: "Toggles dark mode. Available options: true | false"},
@@ -16,7 +16,7 @@ export default function Terminal({ darkMode, setDarkMode }) {
   ];
 
   //About content
-  let content = [(
+  const content = [(
     <div>
       <span className="text-2xl">Hello, I'm Rachit</span>
       <br />
@@ -24,8 +24,8 @@ export default function Terminal({ darkMode, setDarkMode }) {
       <p>My skillset includes :</p>
       <ul>
         <li className="text-red">→ NodeJs</li>
-        <li className="text-orange">→ Angular</li>
-        <li className="text-yellow">→ React</li>
+        <li className="text-orange">→ React</li>
+        <li className="text-yellow">→ Angular</li>
         <li className="text-green">→ Django</li>
         <li className="text-blue">→ Docker</li>
         <li className="text-indigo">→ Chess ♔ </li>
@@ -46,6 +46,8 @@ export default function Terminal({ darkMode, setDarkMode }) {
     let [history, setHistory] = useState([]);
     //Terminal Logs
     let [logs, setLogs] = useState([]);
+    //Input value
+    let [inputCommand, setInputCommand] = useState('');
    
   //To focus on the input whenever the terminal logs change.
   useEffect(() => {
@@ -71,21 +73,33 @@ export default function Terminal({ darkMode, setDarkMode }) {
   function handleTerminalInput (e) {
     if (e.key === "Enter") {
       upClicks = 0;
-      let input = inputRef.current.value;
-      handleCommandInput(input.split(" ")[0], input.split(" ").splice(1));
-      inputRef.current.value = "";
+      let input = inputCommand;
+      handleCommandExecution(input.split(" ")[0], input.split(" ").splice(1));
+      addToHistory(input);
+      setInputCommand('');
       inputRef.current.focus();
       return;
-    } else if (e.key === 'ArrowUp') {
-      //TODO: Implement history commands
-      if(!history.length || history.length < upClicks) {
-        return;
-      }
+    }
+    if (e.key === 'ArrowUp') {
       upClicks += 1;
-      inputRef.current.value = history[history.length -upClicks];
+      console.log("history: ", history);
+      let pos = history.length -upClicks;
+      console.log(pos, upClicks, history[pos]);
+      if(pos > 0 && pos < 10)
+        inputRef.current.value = history[pos];
+      return
     }
   };
 
+  function addToHistory(command) {
+    if(history.length >= 10) {
+      let historyList = history.slice(1);
+      console.log("Length: ", historyList);
+      historyList.push(command);
+      return setHistory(historyList);
+    }
+    return setHistory((history)=>[...history, command]);
+  }
   /**
    * Handles command output on the terminal
    * @param {String} command Command Name
@@ -109,12 +123,7 @@ export default function Terminal({ darkMode, setDarkMode }) {
    * @param {String} command command provided to the terminal
    * @param  {...any} args command options / arguments
    */
-  function handleCommandInput (command, ...args) {
-    setHistory((history)=>{
-      if ( history.length <10)
-        return [...history, command]
-      return [...history.splice(1), command]
-    });
+  function handleCommandExecution (command, ...args) {
     switch(command) {
       case "about":
         handleCommandOutput(command, content);
@@ -179,7 +188,7 @@ export default function Terminal({ darkMode, setDarkMode }) {
       </div>
       {/* Terminal Body */}
       <div className={"terminal-body " +(darkMode ? " text-white terminal-body-dark " : " terminal-body-light ")}>
-        <div className={"p-2 commands"} ref={commandRef}>
+        <div className={"p-2 commands"}>
           {logs.length ?
             (logs.map((log, index) => (<span key={index}>{log}<br /></span>) ) )
           :
@@ -198,6 +207,8 @@ export default function Terminal({ darkMode, setDarkMode }) {
               onKeyUp={(event) => {
                 handleTerminalInput(event);
               }}
+              value={inputCommand}
+              onChange={(e)=>setInputCommand(e.target.value)}
             />
           </span>
         </div>
