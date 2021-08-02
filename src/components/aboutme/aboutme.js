@@ -1,21 +1,16 @@
 import './aboutme.css';
 import myimage from '../../asset/myimage.jpeg'
-import { useRef } from 'react';
+import { forwardRef } from 'react';
 
-export default function AboutMe({darkMode}) {
-
-    let aboutRef = useRef(null);
-    function scrollAboutIntoView(){
-        aboutRef.current.scrollIntoView({behaviour: 'smooth'});
-    }
+function AboutMeFunc({darkMode, handleScrollView}, ref) {
     return (
         <div className={"about-us " + (darkMode?"dark-about":"light-about")}>
-            <div className={"flex items-center justify-center pill " + (darkMode?" pill-bg-dark text-white ":" pill-bg-white text-black ")}>
-                <div className="pill-options pr-1" onClick={()=>{scrollAboutIntoView()}}> About Me</div>|
-                <div className="pill-options px-1">Projects</div>|
-                <div className="pill-options pl-1">Contact</div>
+            <div className={"flex items-center justify-center pill cursor-pointer " + (darkMode?" pill-bg-dark text-white ":" pill-bg-white text-black ")}>
+                <div className="pill-options pr-1" onClick={(e)=>{handleScrollView(e, "about")}}> About Me</div>|
+                {/* <div className="pill-options px-1">Projects</div>| */}
+                <div className="pill-options pl-1" onClick={(e)=>{handleScrollView(e, "contact")}}>Contact</div>
             </div>
-            <div className={"about-content mb-10"} ref={aboutRef}>
+            <div className={"about-content mb-10"} ref={ref}>
                 <div className="image-ctr">
                     <img className="my-img" src={myimage} alt="Yep.. that'd be me if it loaded!" title="Rachit Sharma" loading="lazy" />
                 </div>
@@ -61,3 +56,6 @@ export default function AboutMe({darkMode}) {
         </div>
     )
 }
+
+const AboutMe = forwardRef(AboutMeFunc);
+export default AboutMe;
